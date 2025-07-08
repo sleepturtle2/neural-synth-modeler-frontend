@@ -1,3 +1,5 @@
+import { createGzippedFile } from '../utils/gzipUtils';
+
 const API_BASE_URL = 'http://localhost:8080';
 
 export interface UploadResponse {
@@ -13,19 +15,27 @@ export interface StatusResponse {
 
 export const api = {
   async uploadAudio(file: File): Promise<UploadResponse> {
-    const formData = new FormData();
-    formData.append('file', file);
+    try {
+      // Gzip the WAV file before uploading
+      const gzippedFile = await createGzippedFile(file);
+      
+      const formData = new FormData();
+      formData.append('file', gzippedFile);
 
-    const response = await fetch(`${API_BASE_URL}/v1/models/vital/infer`, {
-      method: 'POST',
-      body: formData,
-    });
+      const response = await fetch(`${API_BASE_URL}/v1/models/vital/infer`, {
+        method: 'POST',
+        body: formData,
+      });
 
-    if (!response.ok) {
-      throw new Error(`Upload failed: ${response.statusText}`);
+      if (!response.ok) {
+        throw new Error(`Upload failed: ${response.statusText}`);
+      }
+
+      return response.json();
+    } catch (error) {
+      console.error('Error during file upload:', error);
+      throw new Error(`Upload failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-
-    return response.json();
   },
 
   async getStatus(requestId: string): Promise<StatusResponse> {

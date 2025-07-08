@@ -39,18 +39,14 @@ const Convert: React.FC = () => {
     });
 
     try {
-      // Simulate upload progress
-      const progressInterval = setInterval(() => {
-        setUploadState((prev: UploadState) => ({
-          ...prev,
-          progress: prev.progress >= 90 ? 90 : prev.progress + 10
-        }));
-      }, 200);
+      // Update progress for gzipping phase
+      setUploadState((prev: UploadState) => ({
+        ...prev,
+        progress: 20
+      }));
 
-      // Make API call to backend
+      // Make API call to backend (this will gzip the file internally)
       const response = await api.uploadAudio(file);
-      
-      clearInterval(progressInterval);
       
       setUploadState({
         status: 'success',
@@ -62,7 +58,7 @@ const Convert: React.FC = () => {
       setUploadState({
         status: 'error',
         progress: 0,
-        errorMessage: 'Failed to upload file. Please try again.'
+        errorMessage: error instanceof Error ? error.message : 'Failed to upload file. Please try again.'
       });
     }
   }, []);
@@ -100,13 +96,13 @@ const Convert: React.FC = () => {
   const getStatusMessage = () => {
     switch (uploadState.status) {
       case 'uploading':
-        return 'Processing your audio file...';
+        return 'Compressing and uploading your audio file...';
       case 'success':
         return 'Upload successful! Your preset is ready.';
       case 'error':
         return uploadState.errorMessage;
       default:
-        return 'Drop your audio file here or click to browse';
+        return 'Drop your WAV file here or click to browse';
     }
   };
 
@@ -116,7 +112,7 @@ const Convert: React.FC = () => {
         <div className="upload-section">
           <h1 className="convert-title">Convert Audio to Preset</h1>
           <p className="convert-subtitle">
-            Upload a WAV file to generate a Vital synthesizer preset
+            Upload a WAV file to generate a Vital synthesizer preset (file will be compressed automatically)
           </p>
           
           <div 
