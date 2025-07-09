@@ -10,6 +10,14 @@ interface UploadState {
   requestId?: string;
 }
 
+const PixelLoader: React.FC = () => (
+  <div className="pixel-loader" aria-label="Loading">
+    <span className="dot" />
+    <span className="dot" />
+    <span className="dot" />
+  </div>
+);
+
 const Convert: React.FC = () => {
   const [uploadState, setUploadState] = useState<UploadState>({
     status: 'idle',
@@ -136,6 +144,7 @@ const Convert: React.FC = () => {
           <h2 className="convert-title">Convert Audio</h2>
           <div className="convert-input-area" {...getRootProps()}>
             <input {...getInputProps()} />
+            {uploadState.status === 'processing' && <PixelLoader />}
             <span className="convert-placeholder">{getStatusMessage()}</span>
             {(uploadState.status === 'uploading' || uploadState.status === 'processing') && (
               <div className="convert-progress-bar">
