@@ -1,12 +1,19 @@
+@import '../../assets/fonts/fonts.css';
+
 .home {
   min-height: 100vh;
-  background: linear-gradient(135deg, #F8F7F4 0%, #F0F7F4 100%);
+  background: #23222a;
 }
 
 .hero-section {
-  padding: 120px 24px 80px;
+  padding: 72px 24px 48px;
   text-align: center;
-  background: linear-gradient(135deg, #F8F7F4 0%, #F0F7F4 100%);
+  background: #23222a;
+  border-radius: 18px;
+  border: 4px double #b97aff;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+  margin: 0 auto 48px auto;
+  max-width: 900px;
 }
 
 .hero-content {
@@ -15,43 +22,56 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 300;
-  color: #2C3E50;
-  margin-bottom: 24px;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #f5f5f5;
+  margin-bottom: 32px;
   line-height: 1.2;
+  font-family: 'Bitcount Grid Double', monospace;
+  letter-spacing: 0.04em;
+  text-shadow:
+    1px 0 0 #fff,
+    -1px 0 0 #fff,
+    0 1px 0 #fff,
+    0 -1px 0 #fff;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
-  color: #5A6C7D;
+  font-size: 1.15rem;
+  color: #bfaec2;
   margin-bottom: 48px;
   line-height: 1.6;
-  font-weight: 400;
+  font-weight: 300;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .cta-button {
   display: inline-block;
-  background: #F7F4E8;
-  color: #2C3E50;
-  padding: 16px 32px;
+  background: #23222a;
+  color: #eaeaea;
+  padding: 14px 0;
+  width: 100%;
+  max-width: 340px;
   border-radius: 12px;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
+  font-weight: 300;
+  font-size: 1.15rem;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  border: 3px dashed #eaeaea;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+  letter-spacing: 0.04em;
 }
 
 .cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(247, 244, 232, 0.3);
-  background: #F0E8D8;
+  background: #eaeaea;
+  color: #23222a;
+  border-color: #bfaec2;
 }
 
 .content-section {
   padding: 80px 24px;
-  background: white;
+  background: #23222a;
 }
 
 .container {
@@ -67,16 +87,18 @@
 }
 
 .feature-card {
-  background: white;
+  background: #191820;
   padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  border: 3px dotted #eaeaea;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.2s;
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
+  border-color: #b97aff;
 }
 
 .feature-icon {
@@ -86,45 +108,67 @@
 
 .feature-card h3 {
   font-size: 1.5rem;
-  font-weight: 500;
-  color: #2C3E50;
+  font-weight: 400;
+  color: #f5f5f5;
   margin-bottom: 16px;
+  font-family: 'Bitcount Grid Double', monospace;
+  letter-spacing: 0.04em;
+  text-shadow:
+    1px 0 0 #fff,
+    -1px 0 0 #fff,
+    0 1px 0 #fff,
+    0 -1px 0 #fff;
 }
 
 .feature-card p {
-  color: #5A6C7D;
+  color: #bfaec2;
   line-height: 1.6;
-  font-weight: 400;
+  font-weight: 300;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .info-section {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  background: #191820;
+  border-radius: 10px;
+  border: 3px dotted #eaeaea;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+  padding: 40px 32px;
 }
 
 .info-section h2 {
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: #2C3E50;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #f5f5f5;
   margin-bottom: 32px;
+  font-family: 'Bitcount Grid Double', monospace;
+  letter-spacing: 0.04em;
+  text-shadow:
+    1px 0 0 #fff,
+    -1px 0 0 #fff,
+    0 1px 0 #fff,
+    0 -1px 0 #fff;
 }
 
 .info-section p {
   font-size: 1.1rem;
-  color: #5A6C7D;
+  color: #bfaec2;
   line-height: 1.7;
   margin-bottom: 24px;
-  font-weight: 400;
+  font-weight: 300;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 100px 16px 60px;
+    padding: 60px 8px 40px;
+    max-width: 100%;
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
   
   .hero-subtitle {
@@ -132,7 +176,7 @@
   }
   
   .content-section {
-    padding: 60px 16px;
+    padding: 60px 8px;
   }
   
   .features {
@@ -145,6 +189,6 @@
   }
   
   .info-section h2 {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
 } 
