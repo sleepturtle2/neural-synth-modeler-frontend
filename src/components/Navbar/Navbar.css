@@ -87,6 +87,11 @@
   border-radius: 1px;
 }
 
+.navbar-link:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .navbar-logo-group {
   display: flex;
   align-items: center;
