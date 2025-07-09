@@ -8,21 +8,24 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
-          Neural Synth Modeler
-        </Link>
+        <div className="navbar-logo-group">
+          <Link to="/" className="navbar-logo">
+            Neural Synth Modeler
+          </Link>
+          <span className="navbar-beta-tag">BETA</span>
+        </div>
         <div className="navbar-links">
           <Link 
             to="/" 
             className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}
           >
-            Home
+            /home
           </Link>
           <Link 
             to="/convert" 
             className={`navbar-link ${location.pathname === '/convert' ? 'active' : ''}`}
           >
-            Convert
+            /convert
           </Link>
         </div>
       </div>

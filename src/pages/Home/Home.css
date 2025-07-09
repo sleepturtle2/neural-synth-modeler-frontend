@@ -3,6 +3,7 @@
 .home {
   min-height: 100vh;
   background: #23222a;
+  padding: 24px;
 }
 
 .hero-section {
@@ -12,7 +13,7 @@
   border-radius: 18px;
   border: 4px double #b97aff;
   box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
-  margin: 0 auto 48px auto;
+  margin: 0 auto 0 auto;
   max-width: 900px;
 }
 
@@ -159,6 +160,77 @@
   margin-bottom: 24px;
   font-weight: 300;
   font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.footer {
+  width: 100%;
+  background: #23222a;
+  border-top: 3px double #b97aff;
+  padding: 32px 0 24px 0;
+  margin-top: 48px;
+  color: #eaeaea;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.footer-main {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-info {
+  font-size: 1rem;
+  color: #bfaec2;
+  margin-bottom: 4px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 4px;
+}
+
+.footer-links a {
+  color: #eaeaea;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 1rem;
+  border: 2px solid #eaeaea;
+  border-radius: 999px;
+  padding: 2px 16px;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  letter-spacing: 0.04em;
+}
+
+.footer-links a:hover {
+  background: #b97aff;
+  color: #23222a;
+  border-color: #b97aff;
+}
+
+.footer-attribution {
+  font-size: 0.95rem;
+  color: #bfaec2;
+  margin-top: 4px;
+}
+
+.footer-logo-pixel {
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-shadow:
+    1px 0 0 #fff,
+    -1px 0 0 #fff,
+    0 1px 0 #fff,
+    0 -1px 0 #fff;
+  color: #f5f5f5;
+  font-size: 1.1em;
+  vertical-align: middle;
 }
 
 @media (max-width: 768px) {
