@@ -19,10 +19,7 @@ const Convert: React.FC = () => {
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
-
     const file = acceptedFiles[0];
-    
-    // Validate file type
     if (!file.name.toLowerCase().endsWith('.wav')) {
       setUploadState({
         status: 'error',
@@ -31,23 +28,14 @@ const Convert: React.FC = () => {
       });
       return;
     }
-
     setUploadState({
       status: 'uploading',
       progress: 0,
       errorMessage: ''
     });
-
     try {
-      // Update progress for gzipping phase
-      setUploadState((prev: UploadState) => ({
-        ...prev,
-        progress: 20
-      }));
-
-      // Make API call to backend (this will gzip the file internally)
+      setUploadState((prev: UploadState) => ({ ...prev, progress: 20 }));
       const response = await api.uploadAudio(file);
-      
       setUploadState({
         status: 'success',
         progress: 100,
@@ -65,9 +53,7 @@ const Convert: React.FC = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: {
-      'audio/wav': ['.wav']
-    },
+    accept: { 'audio/wav': ['.wav'] },
     multiple: false
   });
 
@@ -107,59 +93,27 @@ const Convert: React.FC = () => {
   };
 
   return (
-    <div className="convert">
-      <div className="convert-container">
-        <div className="upload-section">
-          <h1 className="convert-title">Convert Audio to Preset</h1>
-          <p className="convert-subtitle">
-            Upload a WAV file to generate a Vital synthesizer preset (file will be compressed automatically)
-          </p>
-          
-          <div 
-            {...getRootProps()} 
-            className={`upload-area ${isDragActive ? 'drag-active' : ''} ${uploadState.status}`}
-          >
+    <div className="convert-bg">
+      <div className="convert-center">
+        <div className="convert-card">
+          <h2 className="convert-title">Convert Audio</h2>
+          <div className="convert-input-area" {...getRootProps()}>
             <input {...getInputProps()} />
-            <div className="upload-content">
-              <div className="upload-icon">
-                {uploadState.status === 'uploading' ? '⏳' : '📁'}
+            <span className="convert-placeholder">{getStatusMessage()}</span>
+            {uploadState.status === 'uploading' && (
+              <div className="convert-progress-bar">
+                <div className="convert-progress-fill" style={{ width: `${uploadState.progress}%` }} />
               </div>
-              <p className="upload-text">{getStatusMessage()}</p>
-              {uploadState.status === 'uploading' && (
-                <div className="progress-bar">
-                  <div 
-                    className="progress-fill" 
-                    style={{ width: `${uploadState.progress}%` }}
-                  ></div>
-                </div>
-              )}
-            </div>
+            )}
           </div>
-
-          {uploadState.status === 'success' && (
-            <div className="success-message">
-              <p>✅ Your preset has been generated successfully!</p>
-              <button className="download-button" onClick={handleDownload}>
-                Download Preset
-              </button>
-            </div>
-          )}
-
-          {uploadState.status === 'error' && (
-            <div className="error-message">
-              <p>❌ {uploadState.errorMessage}</p>
-              <button 
-                className="retry-button"
-                onClick={() => setUploadState({
-                  status: 'idle',
-                  progress: 0,
-                  errorMessage: ''
-                })}
-              >
-                Try Again
-              </button>
-            </div>
-          )}
+          <button
+            className="convert-action-btn"
+            type="button"
+            disabled={uploadState.status === 'uploading'}
+            onClick={() => document.querySelector<HTMLInputElement>('.convert-input-area input')?.click()}
+          >
+            {uploadState.status === 'uploading' ? 'Uploading...' : 'Upload & Convert'}
+          </button>
         </div>
       </div>
     </div>

@@ -1,3 +1,13 @@
+// TypeScript global declaration for CompressionStream (not in standard DOM types yet)
+declare global {
+  // eslint-disable-next-line no-var
+  var CompressionStream: {
+    prototype: CompressionStream;
+    new (format: 'gzip' | 'deflate' | 'deflate-raw'): CompressionStream;
+  };
+  interface CompressionStream extends TransformStream<Uint8Array, Uint8Array> {}
+}
+
 // Utility function to gzip WAV files
 export const gzipFile = async (file: File): Promise<Blob> => {
   // Check if the file is a WAV file
@@ -12,7 +22,7 @@ export const gzipFile = async (file: File): Promise<Blob> => {
   const uint8Array = new Uint8Array(arrayBuffer);
   
   // Use the CompressionStream API if available (modern browsers)
-  if ('CompressionStream' in window) {
+  if (typeof window !== 'undefined' && 'CompressionStream' in window) {
     const stream = new ReadableStream({
       start(controller) {
         controller.enqueue(uint8Array);
@@ -20,6 +30,7 @@ export const gzipFile = async (file: File): Promise<Blob> => {
       }
     });
 
+    // @ts-ignore: CompressionStream is a modern browser API
     const compressedStream = stream.pipeThrough(new CompressionStream('gzip'));
     const chunks: Uint8Array[] = [];
     
@@ -27,7 +38,7 @@ export const gzipFile = async (file: File): Promise<Blob> => {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      chunks.push(value);
+      chunks.push(value as Uint8Array);
     }
 
     // Combine all chunks

@@ -1,3 +1,152 @@
+/* Background and centering */
+.convert-bg {
+  min-height: 100vh;
+  background: #18171c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.convert-center {
+  width: 100vw;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Card */
+.convert-card {
+  background: #23222a;
+  border: 1.5px solid #a97ca7;
+  border-radius: 18px;
+  box-shadow: 0 2px 24px 0 rgba(0,0,0,0.18);
+  padding: 36px 32px 28px 32px;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.convert-title {
+  color: #f5f5f5;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 700;
+  text-shadow:
+    1px 0 0 #fff,
+    -1px 0 0 #fff,
+    0 1px 0 #fff,
+    0 -1px 0 #fff;
+}
+
+/* Input area */
+.convert-input-area {
+  width: 100%;
+  min-height: 110px;
+  background: #191820;
+  border: 1.5px solid #a97ca7;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  position: relative;
+  cursor: pointer;
+  transition: border 0.2s;
+}
+.convert-input-area:hover,
+.convert-input-area:focus-within {
+  border-color: #d1a3d1;
+}
+.convert-placeholder {
+  color: #bfaec2;
+  font-size: 1.08rem;
+  text-align: center;
+  width: 100%;
+  padding: 0 12px;
+}
+
+/* Progress bar */
+.convert-progress-bar {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 5px;
+  background: #2d2533;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.convert-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a97ca7 0%, #d1a3d1 100%);
+  border-radius: 0 0 12px 12px;
+  transition: width 0.3s;
+}
+
+/* Main action button */
+.convert-action-btn {
+  width: 100%;
+  margin-top: 10px;
+  background: #a97ca7;
+  color: #18171c;
+  border: none;
+  border-radius: 22px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 14px 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 1px 8px 0 rgba(169,124,167,0.08);
+}
+.convert-action-btn:disabled {
+  background: #bfaec2;
+  color: #23222a;
+  cursor: not-allowed;
+}
+
+/* Prompts */
+.convert-prompts {
+  width: 100%;
+  color: #bfaec2;
+  font-size: 1rem;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.convert-prompts > span {
+  margin-bottom: 6px;
+  font-size: 0.98rem;
+  color: #bfaec2;
+  font-weight: 500;
+}
+.convert-prompt-card {
+  background: #23222a;
+  border: 1.5px solid #a97ca7;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #bfaec2;
+  font-size: 0.98rem;
+  margin-bottom: 0;
+  transition: border 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.convert-prompt-card:hover {
+  border-color: #d1a3d1;
+  background: #282733;
+}
+
+/* Remove default input styles */
+.convert-input-area input[type="file"] {
+  display: none;
+}
+
 .convert {
   min-height: 100vh;
   background: linear-gradient(135deg, #F8F7F4 0%, #F0F7F4 100%);
@@ -173,4 +322,30 @@
   .upload-icon {
     font-size: 2.5rem;
   }
+}
+
+/* Custom Font Examples for Convert Page */
+.convert-title-bitcount {
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 700;
+}
+
+.convert-title-cursive {
+  font-family: 'Bitcount Grid Double Cursive', monospace;
+  font-weight: 600;
+}
+
+.convert-title-roman {
+  font-family: 'Bitcount Grid Double Roman', monospace;
+  font-weight: 500;
+}
+
+.convert-placeholder-bitcount {
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 400;
+}
+
+.convert-action-btn-bitcount {
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 600;
 } 

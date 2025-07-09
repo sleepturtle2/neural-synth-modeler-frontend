@@ -1,0 +1,253 @@
+/* Bitcount Grid Double Font Family */
+
+/* Variable Font (most flexible) */
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./BitcountGridDouble-VariableFont_CRSV,ELSH,ELXP,slnt,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Static Fonts - Regular */
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double';
+  src: url('./static/BitcountGridDouble-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cursive Variant */
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Cursive';
+  src: url('./static/BitcountGridDouble_Cursive-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Roman Variant */
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Grid Double Roman';
+  src: url('./static/BitcountGridDouble_Roman-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Utility Classes for Easy Usage */
+.font-bitcount {
+  font-family: 'Bitcount Grid Double', monospace;
+}
+
+.font-bitcount-cursive {
+  font-family: 'Bitcount Grid Double Cursive', monospace;
+}
+
+.font-bitcount-roman {
+  font-family: 'Bitcount Grid Double Roman', monospace;
+}
+
+/* Weight utility classes */
+.font-thin { font-weight: 100; }
+.font-extralight { font-weight: 200; }
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; } 
