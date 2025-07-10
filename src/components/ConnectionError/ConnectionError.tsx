@@ -16,6 +16,14 @@ const ConnectionError: React.FC<ConnectionErrorProps> = ({ healthDetails, onRetr
 
   return (
     <div className="connection-error dark-bg">
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="navbar-logo-group">
+            <span className="navbar-logo">Neural Synth Modeler</span>
+            <span className="navbar-beta-tag">BETA</span>
+          </div>
+        </div>
+      </nav>
       <div className="error-container dotted-border">
         <div className="error-icon">⚠️</div>
         <h1 className="error-title pixel-font">Cannot Connect to Backend</h1>
