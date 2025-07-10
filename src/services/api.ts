@@ -136,5 +136,61 @@ export const api = {
       console.error('[API] Error reading blob:', e);
       throw e;
     }
+  },
+
+  subscribeStatusStream(requestId: string, onStatus: (status: string, rawEvent: MessageEvent) => void, onError?: (err: any) => void) {
+    const url = `${API_BASE_URL}/v1/infer-audio/stream-status/${requestId}`;
+    const eventSource = new EventSource(url);
+    
+    // Handle custom event type 'status_update'
+    eventSource.addEventListener('status_update', (event) => {
+      console.log('[API] Received SSE status_update event:', event.data);
+      let status = undefined;
+      try {
+        const data = JSON.parse(event.data);
+        if (data.status) {
+          status = data.status;
+        }
+      } catch (e) {
+        console.warn('[API] Could not parse SSE event data:', event.data);
+      }
+      if (status) {
+        console.log('[API] Parsed status from SSE:', status);
+        onStatus(status, event);
+      } else {
+        // Always call onStatus with raw event so frontend can try to parse error
+        console.warn('[API] No status found in SSE event, treating as ERROR');
+        onStatus('ERROR', event);
+      }
+    });
+    
+    // Also handle default message events as fallback
+    eventSource.onmessage = (event) => {
+      console.log('[API] Received SSE default message event:', event.data);
+      let status = undefined;
+      try {
+        const data = JSON.parse(event.data);
+        if (data.status) {
+          status = data.status;
+        }
+      } catch (e) {
+        console.warn('[API] Could not parse SSE event data:', event.data);
+      }
+      if (status) {
+        console.log('[API] Parsed status from default SSE event:', status);
+        onStatus(status, event);
+      } else {
+        // Always call onStatus with raw event so frontend can try to parse error
+        console.warn('[API] No status found in default SSE event, treating as ERROR');
+        onStatus('ERROR', event);
+      }
+    };
+    
+    eventSource.onerror = (err) => {
+      console.error('[API] SSE stream error:', err);
+      if (onError) onError(err);
+      eventSource.close();
+    };
+    return () => eventSource.close();
   }
 }; 

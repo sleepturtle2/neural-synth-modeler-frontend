@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { api } from '../../services/api';
 import './Convert.css';
@@ -26,6 +26,57 @@ const Convert: React.FC = () => {
   });
 
   const [downloaded, setDownloaded] = useState(false);
+  const statusStreamUnsub = useRef<null | (() => void)>(null);
+
+  // Subscribe to status stream when requestId is set
+  useEffect(() => {
+    if (uploadState.requestId) {
+      // Set status to processing while waiting for updates
+      setUploadState((prev) => ({ ...prev, status: 'processing' }));
+      statusStreamUnsub.current = api.subscribeStatusStream(
+        uploadState.requestId,
+        (status, rawEvent) => {
+          let errorMsg = '';
+          try {
+            if (rawEvent && rawEvent.data) {
+              const data = typeof rawEvent.data === 'string' ? JSON.parse(rawEvent.data) : rawEvent.data;
+              if (data.error) errorMsg = data.error;
+            }
+          } catch {}
+          console.log('[SSE] Status update:', status, errorMsg ? `Error: ${errorMsg}` : '', rawEvent);
+          if (status === 'DONE') {
+            console.log('[SSE] Setting status to ready');
+            setUploadState((prev) => ({ ...prev, status: 'ready' }));
+          } else if (status === 'ERROR') {
+            console.log('[SSE] Setting status to error');
+            setUploadState((prev) => ({ ...prev, status: 'error', errorMessage: errorMsg || 'Inference failed or invalid preset.' }));
+          } else if (status === 'PROCESSING' || status === 'PENDING') {
+            console.log('[SSE] Setting status to processing');
+            setUploadState((prev) => ({ ...prev, status: 'processing' }));
+          }
+        },
+        (err) => {
+          console.log('[SSE] Status stream error:', err);
+          setUploadState((prev) => {
+            // Only treat as error if we're still processing/uploading and haven't received DONE status
+            if (prev.status === 'processing' || prev.status === 'uploading') {
+              console.log('[SSE] Treating stream closure as error - still processing');
+              return { ...prev, status: 'error', errorMessage: 'Lost connection to backend status stream.' };
+            } else {
+              console.log('[SSE] Stream closed normally after completion, ignoring error event');
+              return prev;
+            }
+          });
+        }
+      );
+    }
+    return () => {
+      if (statusStreamUnsub.current) {
+        statusStreamUnsub.current();
+        statusStreamUnsub.current = null;
+      }
+    };
+  }, [uploadState.requestId]);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
@@ -53,10 +104,7 @@ const Convert: React.FC = () => {
         errorMessage: '',
         requestId: response.request_id
       });
-      // Simulate processing/loading state (replace with real polling if needed)
-      setTimeout(() => {
-        setUploadState((prev) => ({ ...prev, status: 'ready' }));
-      }, 1200);
+      // Remove setTimeout: status will be updated by SSE stream only
     } catch (error) {
       console.error('Upload error details:', error);
       let errorMessage = 'Upload failed: Unknown error';
