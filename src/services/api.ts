@@ -17,18 +17,36 @@ export const api = {
   async uploadAudio(file: File): Promise<UploadResponse> {
     try {
       console.log('[API] Starting upload:', { name: file.name, size: file.size, type: file.type });
-      console.log('[API] Gzipping file...');
-      const gzippedFile = await createGzippedFile(file);
-      console.log('[API] Gzipped file created:', { name: gzippedFile.name, size: gzippedFile.size, type: gzippedFile.type });
+      
+      let fileToUpload: File;
+      let isCompressed = false;
+      
+      // Try to gzip the file first
+      try {
+        console.log('[API] Attempting to gzip file...');
+        const gzippedFile = await createGzippedFile(file);
+        console.log('[API] Gzipped file created:', { name: gzippedFile.name, size: gzippedFile.size, type: gzippedFile.type });
+        fileToUpload = gzippedFile;
+        isCompressed = true;
+      } catch (gzipError) {
+        console.warn('[API] Gzipping failed, using uncompressed file:', gzipError);
+        fileToUpload = file;
+        isCompressed = false;
+      }
 
       const url = `${API_BASE_URL}/v1/models/vital/infer`;
       const headers = { 'Content-Type': 'application/octet-stream' };
-      console.log('[API] Sending POST request:', { url, headers });
+      console.log('[API] Sending POST request:', { 
+        url, 
+        headers, 
+        isCompressed, 
+        fileSize: fileToUpload.size 
+      });
 
       const response = await fetch(url, {
         method: 'POST',
         headers,
-        body: gzippedFile,
+        body: fileToUpload,
       });
       console.log('[API] Response status:', response.status, response.statusText);
 
