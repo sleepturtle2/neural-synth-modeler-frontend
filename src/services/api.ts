@@ -13,7 +13,38 @@ export interface StatusResponse {
   status: string;
 }
 
+export interface HealthResponse {
+  ready: boolean;
+  details?: {
+    mysql?: string;
+    mongo?: string;
+    bentoml?: string;
+  };
+}
+
 export const api = {
+  async checkHealth(): Promise<HealthResponse> {
+    try {
+      console.log('[API] Checking backend health...');
+      const url = `${API_BASE_URL}/v1/health/ready`;
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Health check failed: ${response.status} ${response.statusText}`);
+      }
+      
+      const healthData = await response.json();
+      console.log('[API] Health check response:', healthData);
+      return healthData;
+    } catch (error) {
+      console.error('[API] Health check error:', error);
+      // If the health endpoint itself is unreachable, return only ready: false (no details)
+      return {
+        ready: false
+      };
+    }
+  },
+
   async uploadAudio(file: File): Promise<UploadResponse> {
     try {
       console.log('[API] Starting upload:', { name: file.name, size: file.size, type: file.type });

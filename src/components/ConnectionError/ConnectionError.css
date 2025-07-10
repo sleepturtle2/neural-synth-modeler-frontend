@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.connection-error {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #191922;
+  padding: 20px;
+}
+
+.dark-bg {
+  background: #191922;
+}
+
+.error-container {
+  max-width: 500px;
+  background: #23232e;
+  border-radius: 18px;
+  padding: 40px 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  margin: 0 auto;
+}
+
+.dotted-border {
+  border: 2.5px dotted #fff;
+}
+
+.pixel-font {
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  letter-spacing: 1px;
+}
+
+.error-title {
+  color: #fff;
+  font-size: 1.3rem;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  margin-bottom: 18px;
+  margin-top: 0;
+}
+
+.error-icon {
+  font-size: 54px;
+  margin-bottom: 18px;
+}
+
+.error-description {
+  color: #bdbdd7;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.service-statuses {
+  margin: 28px 0 24px 0;
+  text-align: left;
+}
+
+.service-statuses h3 {
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.service-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 8px;
+  background: #2a2a38;
+  border: 2px solid #ff4d4f;
+}
+
+.service-status.ok {
+  border-color: #10b981;
+  background: #1e2b22;
+}
+
+.service-status.error {
+  border-color: #ff4d4f;
+  background: #2a2a38;
+}
+
+.service-name {
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-size: 0.9rem;
+}
+
+.service-status-text {
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+}
+
+.service-status.ok .service-status-text {
+  color: #10b981;
+  background: #1e2b22;
+}
+
+.service-status.error .service-status-text {
+  color: #ff4d4f;
+  background: #2a2a38;
+}
+
+.error-actions {
+  margin: 32px 0 0 0;
+}
+
+.retry-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  letter-spacing: 1px;
+}
+
+.retry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.retry-button:active {
+  transform: translateY(0);
+} 
