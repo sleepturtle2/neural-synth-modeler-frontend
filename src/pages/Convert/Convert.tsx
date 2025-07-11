@@ -2,7 +2,8 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { api } from '../../services/api';
 import './Convert.css';
-import BlockyLoader from './BlockyLoader';
+import BlockySquareSpinner from './BlockySquareSpinner';
+import DnaLoader from './DnaLoader';
 
 interface UploadState {
   status: 'idle' | 'uploading' | 'processing' | 'ready' | 'downloading' | 'downloaded' | 'error';
@@ -187,68 +188,77 @@ const Convert: React.FC = () => {
   const uploadButtonText = isUploadingOrProcessing ? 'Uploading...' : 'Upload & Convert';
 
   return (
-    <div className="convert-bg">
-      <div className="convert-center">
-        <div className="convert-card">
-          <h2 className="convert-title">Convert Audio</h2>
-          <div className="convert-input-area" {...getRootProps()}>
-            <input {...getInputProps()} />
-            {uploadState.status === 'processing' && <BlockyLoader />}
-            <span className="convert-placeholder">{getStatusMessage()}</span>
-            {(uploadState.status === 'uploading' || uploadState.status === 'processing') && (
-              <div className="convert-progress-bar">
-                <div className="convert-progress-fill" style={{ width: `${uploadState.progress}%` }} />
+    <div>
+      {/* DnaLoader Preview - remove when done */}
+      <div style={{ margin: '40px auto', width: 200 }}>
+        <DnaLoader />
+        <div style={{ color: '#bfaec2', textAlign: 'center', marginTop: 8, fontFamily: 'monospace' }}>
+          (Preview)
+        </div>
+      </div>
+      <div className="convert-bg">
+        <div className="convert-center">
+          <div className="convert-card">
+            <h2 className="convert-title">Convert Audio</h2>
+            <div className="convert-input-area" {...getRootProps()}>
+              <input {...getInputProps()} />
+              {uploadState.status === 'processing' && <DnaLoader />}
+              <span className="convert-placeholder">{getStatusMessage()}</span>
+              {(uploadState.status === 'uploading' || uploadState.status === 'processing') && (
+                <div className="convert-progress-bar">
+                  <div className="convert-progress-fill" style={{ width: `${uploadState.progress}%` }} />
+                </div>
+              )}
+            </div>
+            {uploadState.status === 'ready' && !downloaded && (
+              <button
+                className="convert-action-btn"
+                type="button"
+                onClick={handleDownload}
+              >
+                Download Preset
+              </button>
+            )}
+            {uploadState.status === 'downloading' && (
+              <button
+                className="convert-action-btn"
+                type="button"
+                disabled
+              >
+                Downloading...
+              </button>
+            )}
+            {showUploadButton && (
+              <button
+                className="convert-action-btn"
+                type="button"
+                disabled={isUploadingOrProcessing}
+                onClick={() => document.querySelector<HTMLInputElement>('.convert-input-area input')?.click()}
+              >
+                {uploadButtonText}
+              </button>
+            )}
+            {uploadState.status === 'downloaded' && downloaded && (
+              <div style={{ marginTop: 12 }}>
+                <button
+                  className="convert-again-link"
+                  type="button"
+                  onClick={handleConvertAgain}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#bfaec2',
+                    textDecoration: 'underline',
+                    fontSize: '0.98rem',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  Convert again
+                </button>
               </div>
             )}
           </div>
-          {uploadState.status === 'ready' && !downloaded && (
-            <button
-              className="convert-action-btn"
-              type="button"
-              onClick={handleDownload}
-            >
-              Download Preset
-            </button>
-          )}
-          {uploadState.status === 'downloading' && (
-            <button
-              className="convert-action-btn"
-              type="button"
-              disabled
-            >
-              Downloading...
-            </button>
-          )}
-          {showUploadButton && (
-            <button
-              className="convert-action-btn"
-              type="button"
-              disabled={isUploadingOrProcessing}
-              onClick={() => document.querySelector<HTMLInputElement>('.convert-input-area input')?.click()}
-            >
-              {uploadButtonText}
-            </button>
-          )}
-          {uploadState.status === 'downloaded' && downloaded && (
-            <div style={{ marginTop: 12 }}>
-              <button
-                className="convert-again-link"
-                type="button"
-                onClick={handleConvertAgain}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: '#bfaec2',
-                  textDecoration: 'underline',
-                  fontSize: '0.98rem',
-                  cursor: 'pointer',
-                  padding: 0
-                }}
-              >
-                Convert again
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,48 @@
+.dna-loader {
+  position: relative;
+  margin: 40px auto;
+}
+
+.dna-bead {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #0002;
+  /* No opacity or fading */
+  /* No transition on opacity */
+  transition: left 0.1s linear, top 0.1s linear;
+}
+
+.dna-strand0 {
+  z-index: 2;
+}
+.dna-strand1 {
+  z-index: 1;
+  opacity: 0.7;
+}
+
+@keyframes dna-move {
+  0% {
+    /* Start at left, top S curve */
+    transform: translate(-50%, -50%) translate(
+      calc(40px * sin(0 + var(--i) * 36deg)),
+      calc(20px * sin(0 + var(--i) * 72deg))
+    );
+    opacity: 1;
+  }
+  50% {
+    /* Middle of S curve */
+    transform: translate(-50%, -50%) translate(
+      calc(40px * sin(180deg + var(--i) * 36deg)),
+      calc(20px * sin(360deg + var(--i) * 72deg))
+    );
+    opacity: 0.5;
+  }
+  100% {
+    /* End of S curve (loop) */
+    transform: translate(-50%, -50%) translate(
+      calc(40px * sin(360deg + var(--i) * 36deg)),
+      calc(20px * sin(720deg + var(--i) * 72deg))
+    );
+    opacity: 1;
+  }
+} 
