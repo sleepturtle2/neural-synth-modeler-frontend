@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { api } from '../../services/api';
 import './Convert.css';
+import BlockyLoader from './BlockyLoader';
 
 interface UploadState {
   status: 'idle' | 'uploading' | 'processing' | 'ready' | 'downloading' | 'downloaded' | 'error';
@@ -192,7 +193,7 @@ const Convert: React.FC = () => {
           <h2 className="convert-title">Convert Audio</h2>
           <div className="convert-input-area" {...getRootProps()}>
             <input {...getInputProps()} />
-            {uploadState.status === 'processing' && <PixelLoader />}
+            {uploadState.status === 'processing' && <BlockyLoader />}
             <span className="convert-placeholder">{getStatusMessage()}</span>
             {(uploadState.status === 'uploading' || uploadState.status === 'processing') && (
               <div className="convert-progress-bar">
