@@ -1,68 +1,59 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './DnaLoader.css';
 
 const COLORS = [
-  '#941946', '#fbacc9', '#a2f0fb', '#164ba3',
-  '#941946', '#fbacc9', '#a2f0fb', '#164ba3',
-  '#941946', '#fbacc9'
+  '#fff', '#bfaec2', '#a18fc6', '#a259e6', '#6ec1e4',
+  '#d6d6e7', '#bfaec2', '#a18fc6', '#a259e6', '#fff'
 ];
 
 const BEAD_COUNT = 10;
 const BEAD_SIZE = 12;
-const WIDTH = (BEAD_COUNT - 1) * BEAD_SIZE;
+const WIDTH = (BEAD_COUNT - 1) * BEAD_SIZE + BEAD_SIZE;
 const HEIGHT = 60;
-const AMPLITUDE = 18; // vertical amplitude of sine wave
+const AMPLITUDE = 18;
 const SPEED = 1.5; // seconds per loop
 
-function getBeadPosition(t: number, i: number, count: number, strand: 0 | 1) {
-  const phaseOffset = strand === 0 ? 0 : Math.PI;
-  const beadPhase = t * 2 * Math.PI + (i / count) * 2 * Math.PI + phaseOffset;
-  const x = i * BEAD_SIZE;
-  const y = HEIGHT / 2 + Math.sin(beadPhase) * AMPLITUDE;
-  return {
-    left: x,
-    top: y - BEAD_SIZE / 2
-  };
-}
-
 const DnaLoader: React.FC = () => {
-  const [phase, setPhase] = useState(0);
-  const rafRef = useRef<number | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    let animationFrame: number;
     let start: number | null = null;
+
+    const draw = (phase: number) => {
+      const ctx = canvasRef.current?.getContext('2d');
+      if (!ctx) return;
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+      for (let strand = 0; strand < 2; strand++) {
+        const phaseOffset = strand === 0 ? 0 : Math.PI;
+        for (let i = 0; i < BEAD_COUNT; i++) {
+          const beadPhase = phase * 2 * Math.PI + (i / BEAD_COUNT) * 2 * Math.PI + phaseOffset;
+          const x = i * BEAD_SIZE + BEAD_SIZE / 2;
+          const y = HEIGHT / 2 + Math.sin(beadPhase) * AMPLITUDE;
+          ctx.beginPath();
+          ctx.arc(x, y, BEAD_SIZE / 2, 0, 2 * Math.PI);
+          ctx.fillStyle = COLORS[i % COLORS.length];
+          ctx.fill();
+        }
+      }
+    };
+
     const animate = (ts: number) => {
       if (start === null) start = ts;
       const elapsed = (ts - start) / 1000;
-      setPhase((elapsed / SPEED) % 1);
-      rafRef.current = requestAnimationFrame(animate);
+      const phase = (elapsed / SPEED) % 1;
+      draw(phase);
+      animationFrame = requestAnimationFrame(animate);
     };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
   }, []);
 
   return (
     <div className="dna-loader" style={{ width: WIDTH, height: HEIGHT }}>
-      {[0, 1].map(strand =>
-        Array.from({ length: BEAD_COUNT }).map((_, i) => {
-          const pos = getBeadPosition(phase, i, BEAD_COUNT, strand as 0 | 1);
-          return (
-            <div
-              key={`${strand}-${i}`}
-              className="dna-bead"
-              style={{
-                left: pos.left,
-                top: pos.top,
-                background: COLORS[i % COLORS.length],
-                width: BEAD_SIZE,
-                height: BEAD_SIZE
-              }}
-            />
-          );
-        })
-      )}
+      <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />
     </div>
   );
 };

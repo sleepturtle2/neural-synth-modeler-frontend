@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { api } from '../../services/api';
 import './Convert.css';
-import BlockySquareSpinner from './BlockySquareSpinner';
 import DnaLoader from './DnaLoader';
 
 interface UploadState {
@@ -189,13 +188,6 @@ const Convert: React.FC = () => {
 
   return (
     <div>
-      {/* DnaLoader Preview - remove when done */}
-      <div style={{ margin: '40px auto', width: 200 }}>
-        <DnaLoader />
-        <div style={{ color: '#bfaec2', textAlign: 'center', marginTop: 8, fontFamily: 'monospace' }}>
-          (Preview)
-        </div>
-      </div>
       <div className="convert-bg">
         <div className="convert-center">
           <div className="convert-card">
@@ -203,7 +195,10 @@ const Convert: React.FC = () => {
             <div className="convert-input-area" {...getRootProps()}>
               <input {...getInputProps()} />
               {uploadState.status === 'processing' && <DnaLoader />}
-              <span className="convert-placeholder">{getStatusMessage()}</span>
+              {/* Remove status message during processing */}
+              {uploadState.status !== 'processing' && (
+                <span className="convert-placeholder">{getStatusMessage()}</span>
+              )}
               {(uploadState.status === 'uploading' || uploadState.status === 'processing') && (
                 <div className="convert-progress-bar">
                   <div className="convert-progress-fill" style={{ width: `${uploadState.progress}%` }} />
